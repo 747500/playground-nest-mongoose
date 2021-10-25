@@ -9,7 +9,7 @@ import {
 import { SanitizeMongooseModelInterceptor } from 'nestjs-mongoose-exclude';
 import { AppService } from './app.service';
 import { CreateProfileDto } from './dto/createProfile.dto';
-import { ProfileIdParam } from './profileId.param';
+import { ProfileIdDto } from './dto/profileId.dto';
 
 const exposeId = new SanitizeMongooseModelInterceptor({
   excludeMongooseId: false,
@@ -45,7 +45,7 @@ export class AppController {
 
   @UseInterceptors(excludeId)
   @Get('/profile/:id')
-  public async getProfileById(@Param() { id }: ProfileIdParam) {
+  public async getProfileById(@Param() { id }: ProfileIdDto) {
     return this.appService.getProfileById(id);
   }
 }

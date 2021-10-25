@@ -1,6 +1,6 @@
 import { ObjectId } from 'fastest-validator-nestjs';
 
-export class ProfileIdParam {
+export class ProfileIdDto {
   @ObjectId()
   id: string;
 }
