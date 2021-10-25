@@ -4,12 +4,14 @@ import {
   Get,
   Param,
   Post,
+  Put,
   UseInterceptors,
 } from '@nestjs/common';
 import { SanitizeMongooseModelInterceptor } from 'nestjs-mongoose-exclude';
 import { AppService } from './app.service';
-import { CreateProfileDto } from './dto/createProfile.dto';
+import { ProfileCreateDto } from './dto/profileCreate.dto';
 import { ProfileIdDto } from './dto/profileId.dto';
+import { ProfileUpdateDto } from './dto/profileUpdate.dto';
 
 const exposeId = new SanitizeMongooseModelInterceptor({
   excludeMongooseId: false,
@@ -32,8 +34,17 @@ export class AppController {
 
   @UseInterceptors(excludeId)
   @Post('/profile')
-  public async createProfile(@Body() body: CreateProfileDto) {
+  public async createProfile(@Body() body: ProfileCreateDto) {
     return this.appService.createProfile(body);
+  }
+
+  @UseInterceptors(excludeId)
+  @Put('/profile/:id')
+  public async updateProfile(
+    @Param() { id }: ProfileIdDto,
+    @Body() body: ProfileUpdateDto,
+  ) {
+    return this.appService.updateProfile(id, body);
   }
 
   @UseInterceptors(exposeId)

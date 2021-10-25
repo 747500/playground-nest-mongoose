@@ -9,7 +9,7 @@ export class ProfileName {
   last: string;
 }
 
-@Schema()
+@Schema({ timestamps: true })
 export class Profile {
   /*@Prop(
     raw({

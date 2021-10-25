@@ -1,0 +1,17 @@
+#!/bin/bash
+
+. .env
+
+id="$1"
+
+http PUT "${API_BASE}profile/${id}" << JSON
+{
+	"email": "name45@do.main"
+}
+JSON
+
+#	"name": {
+#		"first": "First44",
+#		"middle": "Middle44",
+#		"last": "Last44"
+#	},

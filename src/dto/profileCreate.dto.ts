@@ -1,25 +1,13 @@
 import {
-  Alphabet,
   Date,
   Email,
   NestedObject,
   ValidationSchema,
 } from 'fastest-validator-nestjs';
+import { ProfileNameDto } from './profileName.dto';
 
 @ValidationSchema({ strict: true })
-export class ProfileNameDto {
-  @Alphabet()
-  first: string;
-
-  @Alphabet()
-  middle: string;
-
-  @Alphabet()
-  last: string;
-}
-
-@ValidationSchema({ strict: true })
-export class CreateProfileDto {
+export class ProfileCreateDto {
   @NestedObject()
   name: ProfileNameDto;
 
