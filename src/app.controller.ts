@@ -1,6 +1,7 @@
 import {
   Body,
   Controller,
+  Delete,
   Get,
   HttpException,
   HttpStatus,
@@ -46,9 +47,9 @@ export class AppController {
     @Param() { id }: ProfileIdDto,
     @Body() body: ProfileUpdateDto,
   ) {
-    const result = await this.appService.updateProfile(id, body);
+    const { matchedCount } = await this.appService.updateProfile(id, body);
 
-    if (0 === result.matchedCount) {
+    if (0 === matchedCount) {
       throw new HttpException('Object was not found', HttpStatus.NOT_FOUND);
     }
 
@@ -58,13 +59,23 @@ export class AppController {
   @UseInterceptors(exposeId)
   @Get('/profile')
   public async getProfileList() {
-    const profiles = await this.appService.getProfileList();
-    return profiles;
+    return await this.appService.getProfileList();
   }
 
   @UseInterceptors(excludeId)
   @Get('/profile/:id')
   public async getProfileById(@Param() { id }: ProfileIdDto) {
     return this.appService.getProfileById(id);
+  }
+
+  @Delete('/profile/:id')
+  public async deleteProfileById(@Param() { id }: ProfileIdDto) {
+    const { deletedCount } = await this.appService.deleteProfileById(id);
+
+    if (0 === deletedCount) {
+      throw new HttpException('Object was not found', HttpStatus.NOT_FOUND);
+    }
+
+    return { delete: 'Ok' };
   }
 }

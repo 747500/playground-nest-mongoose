@@ -29,6 +29,10 @@ export class AppService {
   }
 
   public async getProfileList() {
-    return this.profileModel.find().exec();
+    return await this.profileModel.find().exec();
+  }
+
+  public async deleteProfileById(_id: string) {
+    return await this.profileModel.remove({ _id });
   }
 }
