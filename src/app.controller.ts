@@ -2,6 +2,8 @@ import {
   Body,
   Controller,
   Get,
+  HttpException,
+  HttpStatus,
   Param,
   Post,
   Put,
@@ -44,7 +46,13 @@ export class AppController {
     @Param() { id }: ProfileIdDto,
     @Body() body: ProfileUpdateDto,
   ) {
-    return this.appService.updateProfile(id, body);
+    const result = await this.appService.updateProfile(id, body);
+
+    if (0 === result.matchedCount) {
+      throw new HttpException('Object was not found', HttpStatus.NOT_FOUND);
+    }
+
+    return this.appService.getProfileById(id);
   }
 
   @UseInterceptors(exposeId)
