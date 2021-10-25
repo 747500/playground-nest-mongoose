@@ -1,0 +1,17 @@
+#!/bin/bash
+
+. .env
+
+
+http POST "${API_BASE}profile" << JSON
+{
+	"name": {
+		"first": "First2",
+		"middle": "Middle2",
+		"last": "Last2"
+	},
+	"birthday": "1989-11-22T21:00:00Z",
+	"email": "name2@do.main"
+}
+JSON
+

@@ -1,0 +1,8 @@
+#!/bin/bash
+
+. .env
+
+id="$1"
+
+http GET "${API_BASE}profile/${id}"
+
