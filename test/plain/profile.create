@@ -6,12 +6,12 @@
 http POST "${API_BASE}profile" << JSON
 {
 	"name": {
-		"first": "First5",
-		"middle": "Middle5",
-		"last": "Last5"
+		"first": "First6",
+		"middle": "Middle6",
+		"last": "Last6"
 	},
-	"birthday": "1995-11-22T21:00:00Z",
-	"email": "name5@do.main"
+	"birthday": "1996-11-22T00:00:00+0300",
+	"email": "name6@do.main"
 }
 JSON
 
