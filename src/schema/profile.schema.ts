@@ -1,4 +1,4 @@
-import { Prop, raw, Schema, SchemaFactory } from '@nestjs/mongoose';
+import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Document } from 'mongoose';
 
 export type ProfileDocument = Profile & Document;
@@ -11,13 +11,14 @@ export class ProfileName {
 
 @Schema()
 export class Profile {
-  @Prop(
+  /*@Prop(
     raw({
       first: String,
       middle: String,
       last: String,
     }),
-  )
+  )*/
+  @Prop()
   name: ProfileName;
 
   @Prop()
