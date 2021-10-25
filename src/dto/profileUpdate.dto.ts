@@ -8,7 +8,7 @@ import { ProfileNameDto } from './profileName.dto';
 
 @ValidationSchema({ strict: true })
 export class ProfileUpdateDto {
-  // whole object or not include to update
+  // mongo update logic: whole object or not include to update
   @NestedObject({ optional: true })
   name: ProfileNameDto;
 
