@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { ProfileCreateDto } from './dto/profileCreate.dto';
 import { ProfileUpdateDto } from './dto/profileUpdate.dto';
-import { Profile, ProfileDocument } from './schema/profile.schema';
+import { Profile, ProfileDocument } from './profile.schema';
 import { PaginateModel } from 'mongoose';
 
 @Injectable()
