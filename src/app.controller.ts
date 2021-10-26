@@ -16,10 +16,10 @@ import { ProfileCreateDto } from './dto/profileCreate.dto';
 import { ProfileIdDto } from './dto/profileId.dto';
 import { ProfileUpdateDto } from './dto/profileUpdate.dto';
 
-const exposeId = new SanitizeMongooseModelInterceptor({
-  excludeMongooseId: false,
-  excludeMongooseV: true,
-});
+// const exposeId = new SanitizeMongooseModelInterceptor({
+//   excludeMongooseId: false,
+//   excludeMongooseV: true,
+// });
 
 const excludeId = new SanitizeMongooseModelInterceptor({
   excludeMongooseId: true,
@@ -56,10 +56,10 @@ export class AppController {
     return this.appService.getProfileById(id);
   }
 
-  @UseInterceptors(exposeId)
+  //@UseInterceptors(exposeId)
   @Get('/profile')
   public async getProfileList() {
-    return await this.appService.getProfileList();
+    return await this.appService.getProfileList(0, 3);
   }
 
   @UseInterceptors(excludeId)

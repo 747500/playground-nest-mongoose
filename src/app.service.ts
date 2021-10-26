@@ -1,14 +1,16 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
-import { Model } from 'mongoose';
 import { ProfileCreateDto } from './dto/profileCreate.dto';
 import { ProfileUpdateDto } from './dto/profileUpdate.dto';
 import { Profile, ProfileDocument } from './schema/profile.schema';
+import { PaginateModel } from 'mongoose';
 
 @Injectable()
 export class AppService {
   constructor(
-    @InjectModel(Profile.name) private profileModel: Model<ProfileDocument>,
+    // @InjectConnection() private connection: Connection,
+    @InjectModel(Profile.name)
+    private profileModel: PaginateModel<ProfileDocument>,
   ) {}
 
   getHello(): string {
@@ -28,8 +30,8 @@ export class AppService {
     return await this.profileModel.findById(id);
   }
 
-  public async getProfileList() {
-    return await this.profileModel.find().exec();
+  public async getProfileList(offset = 0, limit = 3) {
+    return await this.profileModel.paginate({}, { offset, limit });
   }
 
   public async deleteProfileById(_id: string) {
